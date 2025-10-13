@@ -48,8 +48,8 @@ startButton.addEventListener('click', () => {
     treasurePos.y = mapImg.y + Math.floor(Math.random() * 764653156 % mapImg.clientHeight);
     nbClicksLeft = MAX_NB_CLICS;
     gamePlaying = true;
-
-    giveHint('')
+    removeEmojisOnMap();
+    giveHint('');
 });
 
 
@@ -77,4 +77,13 @@ function addEmojiOnMap(pos, emoji) {
     newLabel.style.position = 'absolute';
     newLabel.style.left = `${pos.x - newLabel.offsetWidth / 2}px`;
     newLabel.style.top = `${pos.y - newLabel.offsetHeight / 2}px`;
+}
+
+function removeEmojisOnMap() {
+    const children = mapDiv.children
+
+    for (let i = children.length - 1; i >= 0; i--) {
+        if (children[i] === mapImg) continue; // Ne pas supprimer la carte
+        mapDiv.removeChild(children[i]);
+    }
 }
