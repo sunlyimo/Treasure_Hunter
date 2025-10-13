@@ -6,7 +6,7 @@ let nbClicksLeft = 0;
 
 mapImg.addEventListener('click', (evt) => {
     nbClicksLeft--;
-    if (nbClicksLeft === 0) return loseGame();
+    if (nbClicksLeft <= 0) return loseGame();
 
     const magnitude = Math.abs(treasurePos.x - evt.clientX) + Math.abs(treasurePos.y - evt.clientY);
     if (magnitude < 30) {
@@ -31,5 +31,5 @@ startButton.addEventListener('click', (evt) => {
 
 
 function loseGame() {
-
+    console.log("perdu")
 }
