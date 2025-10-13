@@ -1,4 +1,5 @@
 const mapImg = document.getElementById('map')
+const mapDiv = document.getElementById('map-container')
 const startButton = document.getElementById('start-button')
 const gameInfo = document.getElementById('game-info')
 
@@ -13,22 +14,28 @@ mapImg.addEventListener('click', (evt) => {
 
     const magnitude = Math.abs(treasurePos.x - evt.clientX) + Math.abs(treasurePos.y - evt.clientY);
 
-    if (magnitude < 30) {
+    if (magnitude < 30) { // Le click est assé proche du trésors, on gagne.
+        addEmojiOnMap(treasurePos, '💰');
         giveHint("Gagné");
         winGame();
         return;
     } else if (magnitude < 60) {
+        addEmojiOnMap({ x: evt.clientX, y: evt.clientY }, '🔥');
         giveHint("Brûlant!")
     } else if (magnitude < 120) {
+        addEmojiOnMap({ x: evt.clientX, y: evt.clientY }, '🌡️');
         giveHint("Chaud")
     } else if (magnitude < 240) {
+        addEmojiOnMap({ x: evt.clientX, y: evt.clientY }, '🗿');
         giveHint("Tiède")
     } else {
+        addEmojiOnMap({ x: evt.clientX, y: evt.clientY }, '🧊');
         giveHint("Glacé")
     }
 
     nbClicksLeft--;
     if (nbClicksLeft <= 0) {
+        addEmojiOnMap(treasurePos, '💰');
         giveHint("Perdu");
         loseGame();
         return;
@@ -41,12 +48,6 @@ startButton.addEventListener('click', () => {
     treasurePos.y = mapImg.y + Math.floor(Math.random() * 764653156 % mapImg.clientHeight);
     nbClicksLeft = MAX_NB_CLICS;
     gamePlaying = true;
-    treasure = document.createElement("label");
-    treasure.textContent = '💰';
-    treasure.className = 'treasure'
-    treasure.x = treasurePos.x;
-    treasure.y = treasurePos.y;
-    mapImg.appendChild(treasure)
 
     giveHint('')
 });
@@ -64,4 +65,16 @@ function winGame() {
 
 function loseGame() {
     gamePlaying = false;
+}
+
+function addEmojiOnMap(pos, emoji) {
+    newLabel = document.createElement("label");
+    newLabel.textContent = emoji;
+    mapImg.style.position = 'relative';
+    newLabel.style.pointerEvents = 'none';
+    newLabel.style.userSelect = 'none';
+    mapDiv.appendChild(newLabel)
+    newLabel.style.position = 'absolute';
+    newLabel.style.left = `${pos.x - newLabel.offsetWidth / 2}px`;
+    newLabel.style.top = `${pos.y - newLabel.offsetHeight / 2}px`;
 }

@@ -7,10 +7,6 @@ body {
     overflow: hidden;
 }
 
-.treasure {
-    display:block;
-}
-
 .begin-button {
     width: 10vw;
     height: 8vh;
