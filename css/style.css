@@ -4,16 +4,145 @@ body {
     justify-content: center;
     flex-direction: column;
     margin: 0;
-    overflow: hidden;
+    overflow-x: hidden;
+    overflow-y: auto;
+    background-color: #0a1f2f;
+    color: #f5e6ca;
+    font-family: 'Cinzel', serif;
+    background-image: url('https://www.transparenttextures.com/patterns/old-mathematics.png');
+    min-height: 100vh;
+    padding: clamp(10px, 2vw, 20px);
 }
 
-.begin-button {
-    width: 10vw;
-    height: 8vh;
-    background-color: burlywood;
-    font-size: large;
-    color: black;
+h1 {
+    font-size: clamp(1.5rem, 4vw, 4rem);
+    text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.7);
+    margin-bottom: clamp(10px, 2vh, 20px);
+    color: #d4af37;
+    text-align: center;
+    background: rgba(0, 0, 0, 0.3);
+    padding: clamp(8px, 1.5vw, 15px) clamp(15px, 3vw, 30px);
+    border-radius: 10px;
+    border: 2px solid #8b4513;
+    flex-shrink: 0;
+}
+
+#map-container {
+    position: relative;
+    margin: clamp(10px, 2vh, 20px);
+    border: 4px double #d4af37;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(212, 175, 55, 0.7);
+    overflow: hidden;
+    flex-shrink: 1;
+}
+
+/* Desktop: Large image */
+#map-container img {
+    display: block;
+    max-width: 80vw;
+    max-height: 60vh;
     border-radius: 5px;
-    border-style: dashed;
-    border-color: black;
+}
+
+/* Mobile: Small image (no in-between) */
+@media (max-width: 768px) {
+    #map-container img {
+        max-width: 90vw;
+        max-height: 40vh;
+    }
+}
+
+#game-info {
+    font-size: clamp(1rem, 2.5vw, 1.5rem);
+    margin: clamp(8px, 1.5vh, 15px);
+    padding: clamp(8px, 1.5vw, 10px);
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 5px;
+    border: 1px solid #d4af37;
+    text-align: center;
+    flex-shrink: 0;
+}
+
+#start-button {
+    width: auto;
+    padding: clamp(10px, 2vw, 12px) clamp(20px, 4vw, 30px);
+    background-color: #8b4513;
+    color: #f5e6ca;
+    font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+    transition: all 0.3s;
+    font-family: 'Cinzel', serif;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-top: clamp(10px, 2vh, 20px);
+    margin-bottom: clamp(10px, 2vh, 20px);
+    flex-shrink: 0;
+}
+
+#start-button:hover {
+    background-color: #a0522d;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.7);
+}
+
+.treasure {
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    position: absolute;
+    text-shadow: 0 0 5px #d4af37;
+    animation: float 2s ease-in-out infinite;
+    user-select: none;
+    pointer-events: none;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-5px); }
+}
+
+/* Tablet adjustments */
+@media (max-width: 1024px) and (min-width: 769px) {
+    body {
+        padding: clamp(12px, 2vw, 18px);
+    }
+    
+    #map-container {
+        margin: clamp(12px, 2vh, 18px);
+    }
+}
+
+/* Small mobile devices */
+@media (max-width: 480px) {
+    h1 {
+        font-size: clamp(1.2rem, 5vw, 1.8rem);
+        padding: 8px 15px;
+    }
+    
+    #map-container {
+        margin: 10px;
+        border-width: 3px;
+    }
+    
+    #map-container img {
+        max-width: 95vw;
+        max-height: 35vh;
+    }
+    
+    #game-info {
+        font-size: 0.9rem;
+        margin: 8px;
+        padding: 8px;
+    }
+    
+    #start-button {
+        font-size: 1rem;
+        padding: 10px 20px;
+    }
+    
+    .treasure {
+        font-size: 1.5rem;
+    }
 }
